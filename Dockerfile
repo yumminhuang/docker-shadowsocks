@@ -2,8 +2,9 @@ FROM alpine:latest
 
 MAINTAINER Yaming Huang <yumminhuang@gmail.com>
 
-ENV SS_VERSION=3.0.6 \
+ENV SS_VERSION=3.0.7 \
     SS_PORT=31913 \
+    SS_ENCRYPT_METHOD="aes-256-cfb" \
     SS_PASSWORD="shadowsocks"
 
 RUN set -ex && \
@@ -36,5 +37,5 @@ RUN set -ex && \
 
 EXPOSE $SS_PORT/tcp $SS_PORT/udp
 
-ENTRYPOINT ss-server -s '0.0.0.0' -p $SS_PORT -k $SS_PASSWORD -m 'aes-256-cfb'
+ENTRYPOINT ss-server -s '0.0.0.0' -p $SS_PORT -k $SS_PASSWORD -m $SS_ENCRYPT_METHOD -v
 CMD ["--fast-open", "-d", "8.8.8.8", "-d", "8.8.4.4"]
