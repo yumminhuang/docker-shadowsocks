@@ -15,7 +15,7 @@ docker run -d --name ss -p 31913:31913 yumminhuang/docker-shadowsocks
 ```
 which uses
 
-* Encrypt Method: `aes-256-cfb` (can change by specifying `-e SS_ENCRYPY_METHOD='aes-256-gcm'` in `docker run` command);;
+* Encrypt Method: `aes-256-gcm` (can change by specifying `-e SS_ENCRYPY_METHOD='aes-256-cfb'` in `docker run` command);;
 * Server Port: `31913` (can change by specifying `-e SS_PORT=8338` in `docker run` command);
 * Password: `shadowsocks` (can change by specifying `-e 'SS_PASSWORD=strongpassword'` in `docker run` command).
 

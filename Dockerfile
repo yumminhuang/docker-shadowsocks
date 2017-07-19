@@ -4,7 +4,7 @@ MAINTAINER Yaming Huang <yumminhuang@gmail.com>
 
 ENV SS_VERSION=3.0.7 \
     SS_PORT=31913 \
-    SS_ENCRYPT_METHOD="aes-256-cfb" \
+    SS_ENCRYPT_METHOD="aes-256-gcm" \
     SS_PASSWORD="shadowsocks"
 
 RUN set -ex && \
