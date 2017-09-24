@@ -2,7 +2,7 @@ FROM alpine:latest
 
 MAINTAINER Yaming Huang <yumminhuang@gmail.com>
 
-ENV SS_VERSION=3.0.8 \
+ENV SS_VERSION=3.1.0 \
     SS_PORT=31913 \
     SS_ENCRYPT_METHOD="aes-256-gcm" \
     SS_PASSWORD="shadowsocks"
@@ -11,6 +11,7 @@ RUN set -ex && \
     apk add --no-cache --virtual .build-deps \
                                 autoconf \
                                 build-base \
+                                c-ares-dev \
                                 curl \
                                 libev-dev \
                                 libtool \
@@ -18,8 +19,7 @@ RUN set -ex && \
                                 libsodium-dev \
                                 mbedtls-dev \
                                 pcre-dev \
-                                tar \
-                                udns-dev && \
+                                tar && \
     cd /tmp && \
     curl -sSL https://github.com/shadowsocks/shadowsocks-libev/releases/download/v$SS_VERSION/shadowsocks-libev-$SS_VERSION.tar.gz | tar xz --strip 1 && \
     ./configure --prefix=/usr --disable-documentation && \
