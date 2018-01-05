@@ -2,7 +2,7 @@ FROM alpine:latest
 
 MAINTAINER Yaming Huang <yumminhuang@gmail.com>
 
-ENV SS_VERSION=3.1.1 \
+ENV SS_VERSION=3.1.2 \
     SS_PORT=31913 \
     SS_ENCRYPT_METHOD="aes-256-gcm" \
     SS_PASSWORD="shadowsocks"
