@@ -1,11 +1,8 @@
 FROM alpine:latest
 
-MAINTAINER Yaming Huang <yumminhuang@gmail.com>
+LABEL maintainer="Yaming Huang <yumminhuang@gmail.com>"
 
-ENV SS_VERSION=3.1.3 \
-    SS_PORT=31913 \
-    SS_ENCRYPT_METHOD="aes-256-gcm" \
-    SS_PASSWORD="shadowsocks"
+ENV SS_VERSION=3.1.3
 
 RUN set -ex && \
     apk add --no-cache --virtual .build-deps \
@@ -21,7 +18,7 @@ RUN set -ex && \
                                 pcre-dev \
                                 tar && \
     cd /tmp && \
-    curl -sSL https://github.com/shadowsocks/shadowsocks-libev/releases/download/v$SS_VERSION/shadowsocks-libev-$SS_VERSION.tar.gz | tar xz --strip 1 && \
+    curl -sSL "https://github.com/shadowsocks/shadowsocks-libev/releases/download/v$SS_VERSION/shadowsocks-libev-$SS_VERSION.tar.gz" | tar xz --strip 1 && \
     ./configure --prefix=/usr --disable-documentation && \
     make install && \
     cd .. && \
@@ -35,7 +32,7 @@ RUN set -ex && \
     apk del .build-deps && \
     rm -rf /tmp/* /var/cache/apk/*
 
-EXPOSE $SS_PORT/tcp $SS_PORT/udp
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 
-ENTRYPOINT ss-server -s '0.0.0.0' -p $SS_PORT -k $SS_PASSWORD -m $SS_ENCRYPT_METHOD -v
-CMD ["--fast-open", "-d", "8.8.8.8", "-d", "8.8.4.4"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["ss-server"]
