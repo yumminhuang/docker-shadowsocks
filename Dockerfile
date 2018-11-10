@@ -2,7 +2,7 @@ FROM alpine:latest
 
 LABEL maintainer="Yaming Huang <yumminhuang@gmail.com>"
 
-ENV SS_VERSION=3.2.0
+ENV SS_VERSION=3.2.1
 
 RUN set -ex && \
     apk add --no-cache --virtual .build-deps \
