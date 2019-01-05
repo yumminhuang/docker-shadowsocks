@@ -32,7 +32,4 @@ RUN set -ex && \
     apk del .build-deps && \
     rm -rf /tmp/* /var/cache/apk/*
 
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["ss-server"]
