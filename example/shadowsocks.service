@@ -1,0 +1,23 @@
+[Unit]
+Description=Shadowsocks service by Docker container
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStartPre=/usr/bin/docker pull yumminhuang/docker-shadowsocks:latest
+ExecStart=/usr/bin/docker run --rm --name %n -p 8389:8389 \
+  yumminhuang/docker-shadowsocks:latest \
+  ss-server \
+  -s 0.0.0.0 \
+  -p 8389 \
+  -k aes_password \
+  -m aes-256-gcm \
+  -t 60 \
+  --fast-open
+
+[Install]
+WantedBy=multi-user.target
