@@ -1,8 +1,8 @@
-FROM alpine:latest
+FROM alpine:3.11
 
 LABEL maintainer="Yaming Huang <yumminhuang@gmail.com>"
 
-ENV SS_VERSION=3.3.3
+ENV SS_VERSION=3.3.4
 
 RUN set -ex && \
     apk add --no-cache --virtual .build-deps \
